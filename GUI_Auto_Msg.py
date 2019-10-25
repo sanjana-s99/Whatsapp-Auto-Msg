@@ -1,13 +1,15 @@
+#import libs
 from selenium import webdriver
 from tkinter import *
 import tkinter as tk  
 from functools import partial
 from tkinter import messagebox  
 
+#verify function
 def verify(n1, n2, n3):
     name = (n1.get())  
     msg = (n2.get())
-    count = (n3.get()) 
+    count = (n3.get())
 
     a=len(name)
     b=len(msg)
@@ -21,6 +23,7 @@ def verify(n1, n2, n3):
     else:
         messagebox.showinfo("Verifyed","Scan QR To Login And Hit Send...") 
 
+#send function
 def send_msg(n1, n2, n3): 
     name = (n1.get())  
     msg = (n2.get())
@@ -36,27 +39,28 @@ def send_msg(n1, n2, n3):
     a=("Scan QR To Login And Hit Send..." + count + "Messages.")
     messagebox.showinfo("Done!", a) 
  
-   
+#GUI with tkinter   
 root = tk.Tk() 
 driver = webdriver.Chrome()
 driver.get('https://web.whatsapp.com') 
 root.title('Whatsapp Auto')  
    
+#variables
 number1 = tk.StringVar()  
 number2 = tk.StringVar()  
 number3 = tk.StringVar() 
-  
+#lables  
 labelNum1 = tk.Label(root, text="Name of user or group :").grid(row=1, column=0)  
 labelNum2 = tk.Label(root, text="Message : ").grid(row=2, column=0) 
 labelNum3 = tk.Label(root, text="Message Count : ").grid(row=3, column=0)  
-  
+#string entries  
 entryNum1 = tk.Entry(root, textvariable=number1).grid(row=1, column=2)  
 entryNum2 = tk.Entry(root, textvariable=number2).grid(row=2, column=2)
 entryNum3 = tk.Entry(root, textvariable=number3).grid(row=3, column=2)  
-  
+#functions  
 send_msg = partial(send_msg, number1, number2, number3) 
 verify = partial(verify, number1, number2, number3)
-
+#butonts
 buttonCa1 = tk.Button(root, text="Verify", command=verify,activeforeground = "blue",activebackground = "aqua",pady=5).grid(row=4, column=0) 
 buttonCa2 = tk.Button(root, text="Send", command=send_msg,activeforeground = "red",activebackground = "pink",pady=5).grid(row=4, column=2)  
 
